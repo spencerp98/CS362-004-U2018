@@ -681,7 +681,7 @@ int council_roomCardEffect(int currentPlayer, struct gameState *state, int handP
   //Each other player draws a card
   for (i = 0; i < state->numPlayers; i++)
 	{
-	  if (( i = currentPlayer )) ///
+	  if (( i == currentPlayer )) ///
     {
       drawCard(i, state);
     }
@@ -733,7 +733,7 @@ int feastCardEffect(struct gameState *state, int currentPlayer, int choice1, int
   	  x = 0;//No more buying cards
   
   	  if (DEBUG){
-  	    printf("Deck Count: %d\n", state->handCount[currentPlayer] + state->deckCount[currentPlayer] + state->discardCount[currentPlayer]);
+  	  printf("Deck Count: %d\n", state->handCount[currentPlayer] + state->deckCount[currentPlayer] + state->discardCount[currentPlayer]);
   	  }
 
   	}
