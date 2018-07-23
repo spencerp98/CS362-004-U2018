@@ -17,7 +17,7 @@ void testSupplyCount(int supplyPos, struct gameState *state) {
         state->supplyCount[i] = i;
         result = supplyCount(i, state);
         if (result == i) {
-            printf("Test %d:\n  Passed: supply count is correct.\n", i + 1);
+            printf("Test %d:\n  Passed.\n", i + 1);
         }
         else {
             printf("Test %d:\n  Failed: supply count returned %d, it should be %d\n", i + 1, result, i);
