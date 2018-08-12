@@ -8,30 +8,39 @@ public class UrlValidatorTest {
    }
    
    public void testEquals(String url, boolean result, boolean expected) {
-      if(value != expected) {
-         System.out.println("Failed- " + url);
+      if(result != expected) {
+         System.out.println("Failed: " + url);
          System.out.println("    expected: " + expected);
          System.out.println("    result: " + result);
          System.out.println();
       }
+      else{
+         System.out.println("Passed: " + url);
+         System.out.println();
+      }
    }
 
-   public void testManualTest(resultPairs[] tests) {	   
+   public void testManualTest(ResultPair[] tests) {	   
 	   System.out.println("Starting Manual Test");
+	   System.out.flush();
 	   
-	   // Set up validator object
+	   // Create validator object
 	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 	   
 	   // loop through manual test resultPairs and see if they pass
 	   boolean result;
-	   boolean expected
-	   for(int i = 0; i < tests.length; i++) {
+	   boolean expected;
+	   for(int i = 0; i < tests.length; ++i) {
 	      result = urlVal.isValid(tests[i].item);
 	      expected = tests[i].valid;
 	      testEquals(tests[i].item, result, expected);
+	      System.out.flush();
+	      //Assert.assertEquals(tests[i].item, expected, result);
 	   }
 	   
 	   System.out.println("End of Manual Test");
+	   System.out.println();
+	   System.out.println();
    }
    
    public void testYourFirstPartition() {
@@ -56,18 +65,25 @@ public class UrlValidatorTest {
    public static void main(String[] argv) {
 	   UrlValidatorTest fct = new UrlValidatorTest("url test");
 	   
-	   fct.testManualTest(manualTestPairs);
+      ResultPair[] manualTestPairs = { 
+         new ResultPair("http://www.google.com", true),
+         new ResultPair("http://www.google.com/", true),
+         new ResultPair("https://www.oregonstate.edu/", true),
+         new ResultPair("3ht://www.google.com:80/test1?action=view", false),
+         new ResultPair("http://google:80/test1?action=view", false),
+         new ResultPair("http://www.google.com:-80/test1?action=view", false),
+         new ResultPair("http://www.google.com:80/..?action=view", false),
+         new ResultPair("eeee", false)
+      };
+      
+      ResultPair[] partitionTests1 = { 
+         new ResultPair("http://www.google.com", true)
+      };
+      
+      fct.testManualTest(manualTestPairs);
 	   fct.testYourFirstPartition();
 	   fct.testYourSecondPartition();
 	   fct.testIsValid();
    }
-   
-   ResultPair[] manualTestPairs = {  new ResultPair("http://www.google.com", true),
-                                        new ResultPair("http://www.google.com/", true),
-                                        new ResultPair("https://www.oregonstate.edu/", true),
-                                        new ResultPair("3ht://www.google.com:80/test1?action=view", false),
-                                        new ResultPair("http://google:-80/test1?action=view", false),
-                                        new ResultPair("http://www.google.com:80/..?action=view", false)};
-                                        
    
 }

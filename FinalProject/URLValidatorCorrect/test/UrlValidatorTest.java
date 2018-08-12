@@ -16,6 +16,8 @@
  */
 
 import junit.framework.TestCase;
+import static org.junit.Assert.*;
+
 
 /**
  * Performs Validation Test for url validations.
